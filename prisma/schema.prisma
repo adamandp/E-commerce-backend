@@ -1,0 +1,202 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id           String       @id @default(uuid())
+  roles_id     String?
+  image_url    String?
+  email        String?      @unique @db.VarChar(255)
+  phone_number String?      @unique
+  username     String       @unique @db.VarChar(50)
+  password     String       @db.VarChar(255)
+  full_name    String       @db.VarChar(255)
+  region_id    String?
+  gender       gender_type?
+  token        String?
+  is_active    Boolean      @default(true)
+  created_at   DateTime     @default(now())
+  updated_at   DateTime     @updatedAt
+
+  roles            Roles?           @relation(fields: [roles_id], references: [id], onDelete: Cascade)
+  user_permissions userPermission[]
+  address          Address[]
+  Review           Review[]
+  wishlist         Wishlist?
+  Orders           Orders[]
+}
+
+model Wishlist {
+  id        String   @id @default(uuid())
+  user_id   String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user         Users          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  WishlistItem WishlistItem[]
+}
+
+model WishlistItem {
+  id          String   @id @default(uuid())
+  wishlist_id String
+  products_id String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  wishlist Wishlist @relation(fields: [wishlist_id], references: [id])
+  products Products @relation(fields: [products_id], references: [id])
+}
+
+model Permission {
+  id              String           @id @default(uuid())
+  name            String
+  created_at      DateTime         @default(now())
+  updated_at      DateTime         @updatedAt
+  user_permission userPermission[]
+}
+
+model Roles {
+  id         String   @id @default(uuid())
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  users Users[]
+}
+
+model userPermission {
+  id            String   @id @default(uuid())
+  user_id       String
+  permission_id String?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  user       Users       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  permission Permission? @relation(fields: [permission_id], references: [id], onDelete: Cascade)
+}
+
+model Address {
+  id          String   @id @default(uuid())
+  user_id     String
+  province    String   @db.VarChar(100)
+  city        String   @db.VarChar(100)
+  subdistrict String   @db.VarChar(100)
+  village     String   @db.VarChar(100)
+  postal_code Int
+  address     String   @db.VarChar(255)
+  is_primary  Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  users Users @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model Products {
+  id            String   @id @default(uuid())
+  catagories_id String
+  image_url     String
+  name          String   @db.VarChar(100)
+  description   String   @db.VarChar(50)
+  price         Decimal
+  stock         Int
+  rate          Int
+  discount_id   String?
+  views         Int
+  status        Boolean
+  slug          String
+  tags          String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  catagories   Catagories     @relation(fields: [catagories_id], references: [id])
+  discount     Discount?      @relation(fields: [discount_id], references: [id])
+  review       Review[]
+  WishlistItem WishlistItem[]
+  Order_Items  Order_Items[]
+}
+
+model Catagories {
+  id        String   @id @default(uuid())
+  name      String   @db.VarChar(100)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Products[]
+}
+
+enum discount_type {
+  PRECENTAGE
+  FIX
+}
+
+model Discount {
+  id            String        @id @default(uuid())
+  discount_type discount_type
+  start_date    DateTime
+  end_date      DateTime
+  status        Boolean
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  products Products[]
+}
+
+model Review {
+  id         String   @id @default(uuid())
+  product_id String
+  user_id    String
+  rating     Int
+  review     String
+  createdAt  DateTime @default(now())
+
+  products Products @relation(fields: [product_id], references: [id])
+  user     Users    @relation(fields: [user_id], references: [id])
+}
+
+enum gender_type {
+  MAN
+  WOMAN
+  OTHER
+}
+
+model Orders {
+  id          String   @id @default(uuid())
+  user_id     String
+  total_price String
+  status      String
+  createdAt   DateTime @default(now())
+
+  user        Users         @relation(fields: [user_id], references: [id])
+  Order_Items Order_Items[]
+}
+
+model Order_Items {
+  id         String @id @default(uuid())
+  order_id   String
+  product_id String
+  quantity   Int
+  price      Int
+
+  order   Orders   @relation(fields: [order_id], references: [id])
+  product Products @relation(fields: [product_id], references: [id])
+}
+
+enum status_shipment {
+  ON_PROCESS
+  SHIPPED
+  DELIVERED
+}
+
+model Shipments {
+  id              String          @id @default(uuid())
+  order_id        String
+  tracking_number String
+  status          status_shipment
+  courier         String
+  createdAt       DateTime        @default(now())
+}
