@@ -1,0 +1,138 @@
+
+
+{
+  "payment_type": "bank_transfer",
+  "bank_transfer": {
+    "bank": "permata",
+    "va_number": "12345678"
+  },
+  "transaction_details": {
+    "order_id": "order-101b-{{$timestamp}}",
+    "gross_amount": 44000
+  }
+}
+
+{
+    "payment_type": "bank_transfer",
+    "bank_transfer": {
+        "bank": "bca",
+        "va_number": "12345678"
+    },
+    "transaction_details": {
+        "order_id": "order-101b-{{$timestamp}}",
+        "gross_amount": 44000
+    }
+}
+
+{
+    "payment_type": "echannel",
+    "transaction_details": {
+        "order_id": "{{$uuid}}",
+        "gross_amount": 44000
+    },
+    "echannel": {
+        "bill_info1": "Payment For:",
+        "bill_info2": "order"
+    }
+}
+
+{
+    "payment_type": "bank_transfer",
+    "bank_transfer": {
+        "bank": "bni",
+        "va_number": "12345678"
+    },
+    "transaction_details": {
+        "order_id": "order-101b-{{$timestamp}}",
+        "gross_amount": 44000
+    }
+}
+
+{
+    "payment_type": "bank_transfer",
+    "bank_transfer": {
+        "bank": "bri",
+        "va_number": "12345678"
+    },
+    "transaction_details": {
+        "order_id": "order-101b-{{$timestamp}}",
+        "gross_amount": 44000
+    }
+}
+
+{
+    "payment_type": "bank_transfer",
+    "transaction_details": {
+        "gross_amount": 10000,
+        "order_id": "{{$randomUUID}}"
+    },
+    "cimb_va": {
+        "va_number": "12345678"
+    }
+}
+
+{
+    "payment_type": "qris",
+    "transaction_details": {
+        "order_id": "{{$randomUUID}}",
+        "gross_amount": 275000
+    },
+    "qris": {
+        "acquirer": "gopay"
+    }
+}
+
+{
+    "payment_type": "gopay",
+    "transaction_details": {
+        "gross_amount": 44000,
+        "order_id": "{{$randomUUID}}"
+    }
+}
+
+{
+    "payment_type": "gopay",
+    "transaction_details": {
+        "gross_amount": 44000,
+        "order_id": "order-101h-{{$timestamp}}"
+    }
+}
+
+{
+    "payment_type": "cstore",
+    "transaction_details": {
+        "gross_amount": 44000,
+        "order_id": "{{$randomUUID}}"
+    },
+    "cstore": {
+        "store": "alfamart"
+    }
+}
+
+{
+    "payment_type": "cstore",
+    "transaction_details": {
+        "gross_amount": 44000,
+        "order_id": "{{$randomUUID}}"
+    },
+    "cstore": {
+        "store": "Indomaret"
+    }
+}
+
+{
+    "payment_type": "akulaku",
+    "transaction_details": {
+        "gross_amount": 44000,
+        "order_id": "{{$randomUUID}}"
+    }
+}
+
+{
+    "payment_type": "kredivo",
+    "transaction_details": {
+        "gross_amount": 44000,
+        "order_id": "{{$randomUUID}}"
+    }
+}
+

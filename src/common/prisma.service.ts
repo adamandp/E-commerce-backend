@@ -1,5 +1,5 @@
 import { PrismaClient, Prisma } from '@prisma/client';
-import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Logger } from 'nestjs-pino';
 
 @Injectable()
@@ -7,13 +7,13 @@ export class PrismaService
   extends PrismaClient<Prisma.PrismaClientOptions, string>
   implements OnModuleInit
 {
-  constructor(@Inject(Logger) private readonly logger: Logger) {
+  constructor(private readonly logger: Logger) {
     super({
       log: [
+        // { emit: 'event', level: 'query' },
         { emit: 'event', level: 'info' },
         { emit: 'event', level: 'warn' },
         { emit: 'event', level: 'error' },
-        { emit: 'event', level: 'query' },
       ],
     });
   }

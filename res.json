@@ -1,0 +1,53 @@
+// permata
+
+{
+    "message": "🎉 Charge Midtrans created successfully! Welcome aboard! 🚀",
+    "data": {
+        "gross_amount": "44000.00",
+        "transaction_time": "2025-03-19 21:53:52",
+        "transaction_status": "pending",
+        "permata_va_number": "0400030515144096",
+        "expiry_time": "2025-03-20 21:53:52"
+    }
+}
+
+// mandiri
+
+{
+    "message": "🎉 Charge Midtrans created successfully! Welcome aboard! 🚀",
+    "data": {
+        "gross_amount": "44000.00",
+        "transaction_time": "2025-03-19 21:54:01",
+        "transaction_status": "pending",
+        "permata_va_number": "0400012899661234",
+        "expiry_time": "2025-03-20 21:54:01"
+    }
+}
+
+{
+    "message": "🎉 Charge Midtrans created successfully! Welcome aboard! 🚀",
+    "data": {
+        "gross_amount": "44000.00",
+        "transaction_time": "2025-03-19 22:16:20",
+        "transaction_status": "pending",
+        "bill_key": "376538106048",
+        "biller_code": "70012",
+        "expiry_time": "2025-03-20 22:16:20"
+    }
+}
+
+{
+    "message": "🎉 Charge Midtrans created successfully! Welcome aboard! 🚀",
+    "data": {
+        "gross_amount": "44000.00",
+        "transaction_time": "2025-03-19 22:18:28",
+        "transaction_status": "pending",
+        "va_numbers": [
+            {
+                "bank": "bni",
+                "va_number": "9880401257426843"
+            }
+        ],
+        "expiry_time": "2025-03-20 22:18:28"
+    }
+}
