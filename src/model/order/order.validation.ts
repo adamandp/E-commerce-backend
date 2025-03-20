@@ -68,16 +68,17 @@ const paymentPayload = payment.pick({
   paymentMethod: true,
   amount: true,
 });
-
 const orderRequest = z.object({
   order: order.pick({ userId: true, addressId: true }),
   orderItem: z.array(orderItemRequest),
   shipment: shipment.omit({ orderId: true, status: true, id: true }),
   payment: payment.pick({ paymentMethod: true }),
 });
+
 const orderUpdate = order.pick({ id: true, status: true });
 const paymentCreate = payment.omit({ id: true });
 const orderItemCreate = orderItem.omit({ id: true });
+const shipmentCreate = shipment.omit({ id: true, status: true });
 
 export class OrderCreateDTO extends createDTO(orderRequest) {}
 export class OrderUpdateDTO extends createDTO(orderUpdate) {}
@@ -85,3 +86,4 @@ export class OrderItemCreateDTO extends createDTO(orderItemCreate) {}
 export class OrderItemRequestDTO extends createDTO(orderItemRequest) {}
 export class PaymentPayloadDTO extends createDTO(paymentPayload) {}
 export class PaymentCreateDTO extends createDTO(paymentCreate) {}
+export class ShipmentCreateDTO extends createDTO(shipmentCreate) {}

@@ -22,7 +22,7 @@ const user = z
     }),
     password: basePassword,
     confirmPassword: basePassword,
-    fullname: stringMinMax('Full Name', 1, 100),
+    fullName: stringMinMax('Full Name', 1, 100),
     imageUrl: stringMinMax('Image URL', 1, 100).regex(regex.imageUrl, {
       message: ZodErrorMessages.invalidURL('Image URL'),
     }),
